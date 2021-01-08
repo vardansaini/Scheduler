@@ -9,6 +9,10 @@ class PrioritiesPage extends StatefulWidget {
 
 class _PrioritiesPageState extends State<PrioritiesPage> {
   bool _rememberMe = false;
+  bool _hasBeenPressed1 = false;
+  bool _hasBeenPressed2 = false;
+  bool _hasBeenPressed3 = false;
+  bool _hasBeenPressed4 = false;
 
   Widget _buildEmailTF() {
     return Column(
@@ -128,13 +132,16 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.of(context).pushNamed('/home_page');
+          setState(() {
+            _hasBeenPressed1 = !_hasBeenPressed1;
+          });
+
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.white,
+        // color: Colors.white,
         child: Text(
           'Mental Health',
           style: TextStyle(
@@ -146,6 +153,7 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
 
           ),textAlign: TextAlign.center,
         ),
+        color: _hasBeenPressed1 ? Colors.blue : Colors.black,
       ),
     );
   }
@@ -157,13 +165,15 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.of(context).pushNamed('/home_page');
+          setState(() {
+            _hasBeenPressed2 = !_hasBeenPressed2;
+          });
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.white,
+        // color: Colors.white,
         child: Text(
           'Academics',
           style: TextStyle(
@@ -174,6 +184,7 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
             fontFamily: 'OpenSans',
           ),
         ),
+        color: _hasBeenPressed2 ? Colors.blue : Colors.black,
       ),
     );
   }
@@ -185,13 +196,15 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.of(context).pushNamed('/home_page');
+          setState(() {
+            _hasBeenPressed3 = !_hasBeenPressed3;
+          });
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.white,
+        // color: Colors.white,
         child: Text(
           'Work',
           style: TextStyle(
@@ -202,6 +215,7 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
             fontFamily: 'OpenSans',
           ),
         ),
+        color: _hasBeenPressed3 ? Colors.blue : Colors.black,
       ),
     );
   }
@@ -213,13 +227,15 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.of(context).pushNamed('/home_page');
+          setState(() {
+            _hasBeenPressed4 = !_hasBeenPressed4;
+          });
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.white,
+        // color: Colors.white,
         child: Text(
           'Workout',
           style: TextStyle(
@@ -230,6 +246,7 @@ class _PrioritiesPageState extends State<PrioritiesPage> {
             fontFamily: 'OpenSans',
           ),
         ),
+        color: _hasBeenPressed4 ? Colors.blue : Colors.black,
       ),
     );
   }
