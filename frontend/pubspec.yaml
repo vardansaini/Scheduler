@@ -27,6 +27,10 @@ dependencies:
   provider: ^4.3.1 #for state management
   table_calendar: ^2.3.3
   syncfusion_flutter_calendar: 18.4.33
+  googleapis: ^0.56.1
+  googleapis_auth: ^0.2.12
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
