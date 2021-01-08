@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1559944629",
+    "project_id": "scheduler-301101",
+    "storage_bucket": "scheduler-301101.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1559944629:android:ff31896b73e1a8b645cdfc",
+        "android_client_info": {
+          "package_name": "com.example.scheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1559944629-3mh2bpn5r8joa2cgiiqvf4hq38gl1ond.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.scheduler",
+            "certificate_hash": "5dc140d7dab0b1eb45e1787ec28ec9c4b672f712"
+          }
+        },
+        {
+          "client_id": "1559944629-q2ohck4tkt4jpbircctd8pimkij39qbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuZgFOoISDSlXlI69JNnai_NUgGhXDNhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1559944629-q2ohck4tkt4jpbircctd8pimkij39qbb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1559944629-heaqm26ec3lkbngvjihhirrrdbra2t6r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "io.flutter.flutter.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
