@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_login_ui/usermanagement.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -9,6 +11,8 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   bool _rememberMe = false;
+  String _email;
+  String _password;
 
   Widget _buildNameTF() {
     return Column(
@@ -97,7 +101,12 @@ class _SignupPageState extends State<SignupPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.of(context).pushNamed('/profile_page');
+          //Navigator.of(context).pushNamed('/profile_page');
+          FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password).then((signedInUser){
+            UserManagement().storeNewUser(signedInUser, context)
+          }).catchError((e){
+            print(e);
+          });
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

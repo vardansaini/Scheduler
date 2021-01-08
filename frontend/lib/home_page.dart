@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
@@ -105,7 +106,12 @@ var meetings;
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          Navigator.of(context).pushNamed('/schedule_page');
+          //Navigator.of(context).pushNamed('/schedule_page');
+          FirebaseAuth.instance.signOut().then((value){
+            Navigator.of(context).pushReplacementNamed('/login_screen');
+          }).catchError((e){
+            print(e);
+          })
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

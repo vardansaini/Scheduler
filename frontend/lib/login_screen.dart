@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
@@ -9,6 +10,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  String _email;
+  String _password;
 
   Widget _buildEmailTF() {
     return Column(
@@ -51,7 +54,11 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
-            obscureText: true,
+            obscureText: true, onChanged: (value){
+              setState(() {
+                _password = value;
+              });
+          },
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -121,6 +128,11 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
+          FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password).then((user){
+          Navigator.of(context).pushReplacementNamed('/home_page');
+          }).catchError((e){
+            print(e);
+          });
           Navigator.of(context).pushNamed('/profile_page');
         },
         padding: EdgeInsets.all(15.0),
