@@ -97,8 +97,6 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget _
-
   Widget _buildSignUpBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
