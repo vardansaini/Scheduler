@@ -13,6 +13,7 @@ class _SignupPageState extends State<SignupPage> {
   bool _rememberMe = false;
   String _email;
   String _password;
+  final _formKey = GlobalKey<FormState>();
 
   Widget _buildNameTF() {
     return Column(
@@ -23,7 +24,8 @@ class _SignupPageState extends State<SignupPage> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            onSaved: (value) => _email = value,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -50,8 +52,9 @@ class _SignupPageState extends State<SignupPage> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
-            obscureText: true,
+          child: TextFormField(
+            onSaved: (value) => _password = value,
+            keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -94,6 +97,8 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
+  Widget _
+
   Widget _buildSignUpBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -103,7 +108,7 @@ class _SignupPageState extends State<SignupPage> {
         onPressed: () {
           //Navigator.of(context).pushNamed('/profile_page');
           FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password).then((signedInUser){
-            UserManagement().storeNewUser(signedInUser, context)
+            UserManagement().storeNewUser(signedInUser, context);
           }).catchError((e){
             print(e);
           });

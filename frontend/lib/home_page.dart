@@ -111,7 +111,7 @@ var meetings;
             Navigator.of(context).pushReplacementNamed('/login_screen');
           }).catchError((e){
             print(e);
-          })
+          });
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
