@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
-//Todo: Age, timezone, Academic TImeZone
+//Todo: Age, timezone, Academic TimeZone
 class ProfilePage extends StatefulWidget {
   @override
-  _profilePageState createState() => _profilePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _profilePageState extends State<ProfilePage> {
+class _ProfilePageState extends State<ProfilePage> {
   bool _rememberMe = false;
 
   Widget _buildEmailTF() {

@@ -9,9 +9,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ApiTest extends StatefulWidget{
   @override
-  _apitestState createState() => _apitestState();
+  _ApitestState createState() => _ApitestState();
 }
-class _apitestState extends State<ApiTest> {
+class _ApitestState extends State<ApiTest> {
   static const _scopes = const [CalendarApi.CalendarScope];
   var _credentials;
 
