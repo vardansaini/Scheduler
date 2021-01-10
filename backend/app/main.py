@@ -26,13 +26,13 @@ def process_calendars(calendars: List[str], start: Optional[str] = None, end: Op
     downloads = []
     for calendar in calendars:
         blob = google_storage.Blob(calendar, bucket)
-        download = os.path.join("data", calendar)
+        download = os.path.join("/data", calendar)
         blob.download_to_filename(download)
         downloads.append(download)
 
     timestamp = time.time()
     filename = decoded_token['uid'] + "_" + str(timestamp) + ".jpg"
-    output = str(os.path.join("data", filename))
+    output = str(os.path.join("/data", filename))
 
     processor = MultiCalendar(start, end, downloads)
     processor.plot_time_summary(output)
