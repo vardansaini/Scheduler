@@ -4,10 +4,10 @@ import 'package:flutter_login_ui/constants.dart';
 //Todo: Age, timezone, Academic TImeZone
 class ImportPage extends StatefulWidget {
   @override
-  _importPageState createState() => _importPageState();
+  _ImportPageState createState() => _ImportPageState();
 }
 
-class _importPageState extends State<ImportPage> {
+class _ImportPageState extends State<ImportPage> {
   bool _rememberMe = false;
 
   Widget _buildNameTF() {

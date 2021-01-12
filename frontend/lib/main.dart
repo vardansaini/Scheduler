@@ -6,6 +6,7 @@ import 'package:flutter_login_ui/priorities_page.dart';
 import 'package:flutter_login_ui/profile_page.dart';
 import 'package:flutter_login_ui/schedule_page.dart';
 import 'package:flutter_login_ui/signup_screen.dart';
+import 'package:flutter_login_ui/settings_page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
         '/priorities_page': (BuildContext context) => PrioritiesPage(),
         '/schedule_page': (BuildContext context) => SchedulePage(),
         '/import_page': (BuildContext context) => ImportPage(),
+        '/settings_page': (BuildContext context) => SettingsPage(),
       },
-      home: LoginScreen(),
+      home:SettingsPage(),
     );
   }
 }

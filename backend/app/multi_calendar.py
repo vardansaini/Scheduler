@@ -58,9 +58,9 @@ class MultiCalendar:
             print('')
         return times, names, prod_scores
 
-    def plot_time_summary(self, prod_score, all_days):
+    def plot_time_summary(self, save_name):
         names = [cal.name for cal in self.calendars]
         time_delta_dicts = [cal.time_delta_dict for cal in self.calendars]
-        plot_multi_cal_time(names, time_delta_dicts, self.productivity_dict, plot_productivity=prod_score,
-                            plot_all_days=all_days, print_details=self.print_details, add_gridlines=self.gridlines)
+        plot_multi_cal_time(names, time_delta_dicts, self.productivity_dict, save_name,
+                            print_details=self.print_details, add_gridlines=self.gridlines)
 

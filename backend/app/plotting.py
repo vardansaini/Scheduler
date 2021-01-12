@@ -30,7 +30,7 @@ def get_max_bar_height(bar_plot, existing_bar_heights):
     return max(heights)
 
 
-def plot_multi_cal_time(names, time_delta_dicts, productivity_dict, granularity='hours', label_time=True,
+def plot_multi_cal_time(names, time_delta_dicts, productivity_dict, save_name, granularity='hours', label_time=True,
                         label_day=True, plot_productivity=True, plot_all_days=True, print_details=True,
                         add_gridlines=True):
     # y-axis in bold
@@ -200,6 +200,6 @@ def plot_multi_cal_time(names, time_delta_dicts, productivity_dict, granularity=
 
     # Show plot
     try:
-        plt.show()
+        plt.savefig(save_name)
     except KeyboardInterrupt:
         pass

@@ -5,10 +5,10 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 //Todo: Age, timezone, Academic TImeZone
 class SchedulePage extends StatefulWidget {
   @override
-  _schedulePageState createState() => _schedulePageState();
+  _SchedulePageState createState() => _SchedulePageState();
 }
 
-class _schedulePageState extends State<SchedulePage> {
+class _SchedulePageState extends State<SchedulePage> {
   bool _rememberMe = false;
 
 Widget _buildSch(){
