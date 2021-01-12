@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
@@ -51,10 +52,26 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   //final myController =
   bool _rememberMe = false;
-  String _email;
-  String _password;
-  final _formKey = GlobalKey<FormState>();
-
+  String _email, _password, _name;
+  TextEditingController _nameCont;
+  TextEditingController _emailCont;
+  TextEditingController _passCont;
+  DatabaseReference _ref;
+  @override
+  void initState() {
+    super.initState();
+    _nameCont = TextEditingController();
+    _emailCont = TextEditingController();
+    _passCont = TextEditingController();
+    _ref = FirebaseDatabase.instance.reference();
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    _emailCont.dispose();
+    _passCont.dispose();
+    _nameCont.dispose();
+  }
   Widget _buildNameTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +82,7 @@ class _SignupPageState extends State<SignupPage> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextFormField(
-            onSaved: (value) => _email = value,
+            controller: _nameCont,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -93,7 +110,7 @@ class _SignupPageState extends State<SignupPage> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextFormField(
-            onSaved: (value) => _password = value,
+            controller: _emailCont,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -120,6 +137,7 @@ class _SignupPageState extends State<SignupPage> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: _passCont,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -137,6 +155,15 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
+  void pushDataFirebase() {
+    Map<String, String> userEntry = {
+      'Name' : _name,
+      'Email' : _email,
+      'Password' : _password,
+    };
+    _ref.push().set(userEntry);
+  }
+
   Widget _buildSignUpBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
@@ -145,10 +172,11 @@ class _SignupPageState extends State<SignupPage> {
         elevation: 5.0,
         onPressed: () {
           //Navigator.of(context).pushNamed('/profile_page');
-          FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password).then((signedInUser){
-            UserManagement().storeNewUser(signedInUser, context);
-          }).catchError((e){
-            print(e);
+          setState(() {
+            _name = _nameCont.text;
+            _email = _emailCont.text;
+            _password = _passCont.text;
+            pushDataFirebase();
           });
         },
         padding: EdgeInsets.all(15.0),

@@ -19,7 +19,8 @@ environment:
 dependencies:
   firebase_auth:
   cloud_firestore:
-
+  firebase_database:
+  firebase_storage:
   flutter:
     sdk: flutter
 
