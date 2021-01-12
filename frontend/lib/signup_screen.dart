@@ -3,6 +3,45 @@ import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_login_ui/usermanagement.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = GoogleSignIn();
+
+Future<String> signInWithGoogle() async {
+  await Firebase.initializeApp();
+
+  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
+
+  final AuthCredential credential = GoogleAuthProvider.credential(
+    accessToken: googleSignInAuthentication.accessToken,
+    idToken: googleSignInAuthentication.idToken,
+  );
+
+  final UserCredential authResult = await _auth.signInWithCredential(credential);
+  final User user = authResult.user;
+
+  if(user != null){
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() != null);
+
+    final User currentUser = _auth.currentUser;
+    assert(user.uid == currentUser.uid);
+
+    print('signInWithGoogle succeeded: $user');
+
+    return '$user';
+  }
+  return null;
+}
+void signOutGoogle() async{
+  await googleSignIn.signOut();
+  print("User Signed Out");
+}
+
+
 
 class SignupPage extends StatefulWidget {
   @override
@@ -10,6 +49,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  //final myController =
   bool _rememberMe = false;
   String _email;
   String _password;
@@ -180,13 +220,24 @@ class _SignupPageState extends State<SignupPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-                () => print('Login with Facebook'),
+                () {
+                  signInWithGoogle().then((result) {
+                    if(result != null) {
+                      Navigator.of(context).pushNamed('/home_page');
+                    }
+                  });
+                },
             AssetImage(
               'assets/logos/facebook.jpg',
             ),
           ),
           _buildSocialBtn(
-                () => print('Login with Google'),
+                () {
+    signInWithGoogle().then((result) {
+    if(result != null) {
+    Navigator.of(context).pushNamed('/home_page');
+    }
+    });},
             AssetImage(
               'assets/logos/google.jpg',
             ),

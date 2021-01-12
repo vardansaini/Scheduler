@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
+import 'package:flutter_login_ui/login_screen.dart';
 //import 'package:table_calendar/table_calendar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
+import 'package:flutter_login_ui/signup_screen.dart';
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -106,12 +107,8 @@ var meetings;
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          //Navigator.of(context).pushNamed('/schedule_page');
-          FirebaseAuth.instance.signOut().then((value){
-            Navigator.of(context).pushReplacementNamed('/login_screen');
-          }).catchError((e){
-            print(e);
-          });
+          signOutGoogle();
+          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context){return LoginScreen();}), ModalRoute.withName('/'));
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -119,7 +116,7 @@ var meetings;
         ),
         color: Colors.white,
         child: Text(
-          'Schedule',
+          'Sign Out',
           style: TextStyle(
             color: Color(0xFF527DAA),
             letterSpacing: 1.5,
