@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         '/import_page': (BuildContext context) => ImportPage(),
         '/settings_page': (BuildContext context) => SettingsPage(),
       },
-      home:LoginScreen(),
+      home:HomePage(),
     );
   }
 }

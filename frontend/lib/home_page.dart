@@ -99,35 +99,6 @@ var meetings;
 
   }*/
 
-
-  Widget _buildLoginBtn() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: RaisedButton(
-        elevation: 5.0,
-        onPressed: () {
-          signOutGoogle();
-          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context){return LoginScreen();}), ModalRoute.withName('/'));
-        },
-        padding: EdgeInsets.all(15.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        color: Colors.white,
-        child: Text(
-          'Sign Out',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
-    );
-  }
 List<Meeting> _getDataSource() {
   meetings = <Meeting>[];
   final DateTime today = DateTime.now();
@@ -141,6 +112,18 @@ List<Meeting> _getDataSource() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text("Home", style: TextStyle(color: Colors.blue)),
+          centerTitle: true,
+          leading: IconButton(
+              icon: Icon(Icons.settings),
+              color: Colors.blue,
+              onPressed: () {
+                Navigator.of(context).pushNamed('/settings_page');
+              }
+          )
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: GestureDetector(
@@ -175,19 +158,7 @@ List<Meeting> _getDataSource() {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        'Home',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      //SizedBox(height: 20.0,),
-                      //_buildCalendarCrd(),
                       _buildCal(),
-                      _buildLoginBtn(),
                     ],
                   ),
                 ),
