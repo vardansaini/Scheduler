@@ -79,7 +79,9 @@ class _SignupPageState extends State<SignupPage> {
 
   void _register() {
     //await Firebase.initializeApp();
-     _auth.createUserWithEmailAndPassword(email: _emailCont.text,password: _passCont.text,);
+     _auth.createUserWithEmailAndPassword(email: _emailCont.text.trim(),password: _passCont.text.trim(),).then((_){
+       Navigator.of(context).pushNamed('/import_page');
+     });
   }
   Widget _buildNameTF() {
     return Column(

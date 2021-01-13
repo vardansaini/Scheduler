@@ -38,12 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
     if(formState.validate()){
       formState.save();
       try{
-        _auth.signInWithEmailAndPassword(email: _emailCont.text, password: _passCont.text);
-        print("I was here");
+        _auth.signInWithEmailAndPassword(email: _emailCont.text.trim(), password: _passCont.text.trim()).then((_){
+          Navigator.of(context).pushNamed('/home_page');
+        });
         //Navigator.of(context).pop();
-        print("I was here 2");
       }catch(e){
-        print("I was here after going to try");
         print(e.message);
     }
 
