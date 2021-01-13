@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_login_ui/constants.dart';
+import 'package:flutter_login_ui/login_screen.dart';
+//import 'package:table_calendar/table_calendar.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:flutter_login_ui/signup_screen.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -72,6 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
           ]
              )
+
       ),
             Card(
               elevation: 4.0,
@@ -141,9 +150,39 @@ class _SettingsPageState extends State<SettingsPage> {
                 )
     ]
       )
-      )
+      ),
+            Card(
+              elevation: 4.0,
+              margin: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 1.0),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+           child: RaisedButton(
+          elevation: 5.0,
+          onPressed: () {
+            signOutGoogle();
+            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context){return LoginScreen();}), ModalRoute.withName('/'));
+          },
+          padding: EdgeInsets.all(15.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30.0),
+          ),
+          color: Colors.white,
+          child: Text(
+            'Sign Out',
+            style: TextStyle(
+              color: Color(0xFF527DAA),
+              letterSpacing: 1.5,
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OpenSans',
+            ),
+          ),
+        ),
+            )
+
     ]
+
                 )
+
       )
     );
   }
