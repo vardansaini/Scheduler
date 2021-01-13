@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_login_ui/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -12,6 +17,38 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
   String _email;
   String _password;
+  TextEditingController _emailCont;
+  TextEditingController _passCont;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    _emailCont = TextEditingController();
+    _passCont = TextEditingController();
+  }
+  @override
+  void dispose() {
+    _emailCont.dispose();
+    _passCont.dispose();
+    super.dispose();
+  }
+  Future<void> signIn() async{
+    //Firebase.initializeApp(); //Added by VS
+    final formState = _formKey.currentState;
+    if(formState.validate()){
+      formState.save();
+      try{
+        _auth.signInWithEmailAndPassword(email: _emailCont.text, password: _passCont.text);
+        print("I was here");
+        //Navigator.of(context).pop();
+        print("I was here 2");
+      }catch(e){
+        print("I was here after going to try");
+        print(e.message);
+    }
+
+    }
+  }
 
   Widget _buildEmailTF() {
     return Column(
@@ -22,7 +59,15 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            validator: (input){
+              if(input.isEmpty) {
+                return 'Please provide a correct email address';
+              }
+              return null;
+            },
+            controller: _emailCont,
+            //onSaved: (input) => _email = input,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -53,12 +98,19 @@ class _LoginScreenState extends State<LoginScreen> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
-            obscureText: true, onChanged: (value){
+          child: Form( child: TextFormField(
+            validator: (input){
+              if(input.length < 6) {
+                return 'Please enter a valid password';
+              }
+            return null;
+            },
+            controller: _passCont,
+            //onSaved: (input) => _password = input,
+            obscureText: true, /*onChanged: (value){
               setState(() {
                 _password = value;
-              });
-          },
+              }*/
             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
@@ -74,6 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
               hintStyle: kHintTextStyle,
             ),
           ),
+        ),
         ),
       ],
     );
@@ -128,12 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
-          FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password).then((user){
-          Navigator.of(context).pushReplacementNamed('/home_page');
-          }).catchError((e){
-            print(e);
-          });
-          Navigator.of(context).pushNamed('/profile_page');
+          signIn();
+          //final  user = await _auth.currentUser();
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -284,6 +333,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     horizontal: 40.0,
                     vertical: 120.0,
                   ),
+                  child: Form(
+                    key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -317,6 +368,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               )
+              ),
             ],
           ),
         ),

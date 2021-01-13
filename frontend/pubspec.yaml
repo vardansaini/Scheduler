@@ -17,10 +17,6 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-  firebase_auth:
-  cloud_firestore:
-  firebase_database:
-  firebase_storage:
   flutter:
     sdk: flutter
 
@@ -34,8 +30,13 @@ dependencies:
   googleapis: ^0.56.1
   googleapis_auth: ^0.2.12
   url_launcher: ^5.7.10
-  firebase_core: ^0.6.0
+  firebase_core: ^0.7.0
   google_sign_in: ^4.5.9
+  firebase_dynamic_links:
+  firebase_auth:
+  cloud_firestore:
+  firebase_database:
+  firebase_storage:
 
 
 

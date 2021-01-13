@@ -57,6 +57,10 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController _emailCont;
   TextEditingController _passCont;
   DatabaseReference _ref;
+  final GlobalKey<FormState>_formKey = GlobalKey<FormState>();
+  bool _success;
+  String _userEmail;
+
   @override
   void initState() {
     super.initState();
@@ -67,10 +71,15 @@ class _SignupPageState extends State<SignupPage> {
   }
   @override
   void dispose() {
-    super.dispose();
     _emailCont.dispose();
     _passCont.dispose();
     _nameCont.dispose();
+    super.dispose();
+  }
+
+  void _register() {
+    //await Firebase.initializeApp();
+     _auth.createUserWithEmailAndPassword(email: _emailCont.text,password: _passCont.text,);
   }
   Widget _buildNameTF() {
     return Column(
@@ -110,6 +119,12 @@ class _SignupPageState extends State<SignupPage> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextFormField(
+            validator: (String value){
+              if(value.isEmpty) {
+                return 'Please enter correct email';
+              }
+              return null;
+            },
             controller: _emailCont,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
@@ -136,7 +151,13 @@ class _SignupPageState extends State<SignupPage> {
           alignment: Alignment.centerLeft,
           decoration: kBoxDecorationStyle,
           height: 60.0,
-          child: TextField(
+          child: TextFormField(
+            validator: (String value){
+              if(value.length < 6) {
+                return 'Password length cannot be smaller than 6';
+              }
+              return null;
+            },
             controller: _passCont,
             obscureText: true,
             style: TextStyle(
@@ -171,13 +192,19 @@ class _SignupPageState extends State<SignupPage> {
       child: RaisedButton(
         elevation: 5.0,
         onPressed: () {
+          if(_formKey.currentState.validate()) {
+            _register();
+          }
+          //setState(() {
+            //_auth.createUserWithEmailAndPassword(email: _emailCont.text,password: _passCont.text,);
+          //});
           //Navigator.of(context).pushNamed('/profile_page');
-          setState(() {
+          /*setState(() {
             _name = _nameCont.text;
             _email = _emailCont.text;
             _password = _passCont.text;
             pushDataFirebase();
-          });
+          });*/
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -339,7 +366,9 @@ class _SignupPageState extends State<SignupPage> {
                     horizontal: 40.0,
                     vertical: 120.0,
                   ),
-                  child: Column(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
@@ -352,8 +381,8 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      _buildNameTF(),
-                    _buildEmailTF(),
+                    //  _buildNameTF(),
+                      _buildEmailTF(),
                       _buildPasswordTF(),
                       SizedBox(
                         height: 30.0,
@@ -362,10 +391,19 @@ class _SignupPageState extends State<SignupPage> {
                       _buildSignUpWithText(),
                       _buildSocialBtnRow(),
                       _buildSignInBtn(),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(_success == null
+                        ?''
+                        :(_success
+                        ? 'successfully registered ' + _userEmail
+                        : 'Registration failed')),
+                      )
                     ],
                   ),
                 ),
               )
+              ),
             ],
           ),
         ),
