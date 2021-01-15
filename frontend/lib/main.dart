@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         '/settings_import':(BuildContext context) => SettingsImport(),
         '/settings_priorities': (BuildContext context) => SettingsPriorities(),
       },
-      home: SettingsPage(),
+      home: SignupPage(),
     );
   }
 }

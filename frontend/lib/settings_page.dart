@@ -14,6 +14,32 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  TimeOfDay _timewake = TimeOfDay.now();
+  TimeOfDay picked1;
+  TimeOfDay _timesleep = TimeOfDay.now();
+  TimeOfDay picked2;
+
+  Future<Null> selectTimeWake(BuildContext context) async {
+    picked1 = await showTimePicker(
+      context: context,
+      initialTime: _timewake,
+    );
+
+    setState(() {
+      _timewake = picked1;
+    });
+  }
+  Future<Null> selectTimeSleep(BuildContext context) async {
+    picked2 = await showTimePicker(
+      context: context,
+      initialTime: _timesleep,
+    );
+
+    setState(() {
+      _timesleep  = picked2;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,11 +140,19 @@ class _SettingsPageState extends State<SettingsPage> {
                       onChanged: (val){}
                     ),
                     ListTile(
-                      title: Text("Sleep Time"),
+                      title: Text("Wake Up: ${_timewake.hour}:${_timewake.minute}"),
                       //To Do: display set sleep time
                       trailing: Icon(Icons.edit),
                       onTap: () {
-                        // edit sleep time option
+                        selectTimeWake(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text("Sleep Time: ${_timesleep.hour}:${_timesleep.minute}"),
+                      //To Do: display set sleep time
+                      trailing: Icon(Icons.edit),
+                      onTap: () {
+                        selectTimeSleep(context);
                       },
                     ),
             ]
@@ -135,7 +169,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   tileColor: Colors.lightBlueAccent,
                 ),
                 SwitchListTile(
-                  value: false,
+                  value: true,
                   onChanged: (val){
                     //change to true
                   },
