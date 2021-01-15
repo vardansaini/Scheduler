@@ -37,6 +37,8 @@ dependencies:
   cloud_firestore:
   firebase_database:
   firebase_storage:
+  image_picker:
+  icalendar_parser:
 
 
 
