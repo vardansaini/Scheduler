@@ -96,14 +96,14 @@ class _SettingsPageState extends State<SettingsPage> {
                         title: Text("Import Calendars"),
                         trailing: Icon(Icons.keyboard_arrow_right),
                         onTap: (){
-                          Navigator.of(context).pushNamed('/import_page');
+                          Navigator.of(context).pushNamed('/settings_import');
                          },
                     ),
                     ListTile(
                       title: Text("Change Priorities"),
                       trailing: Icon(Icons.keyboard_arrow_right),
                       onTap: (){
-                        Navigator.of(context).pushNamed('/priorities_page');
+                        Navigator.of(context).pushNamed('/settings_priorities');
                       },
                     ),
 

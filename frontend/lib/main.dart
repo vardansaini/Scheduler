@@ -6,14 +6,16 @@ import 'package:flutter_login_ui/login_screen.dart';
 import 'package:flutter_login_ui/priorities_page.dart';
 import 'package:flutter_login_ui/profile_page.dart';
 import 'package:flutter_login_ui/schedule_page.dart';
+import 'package:flutter_login_ui/settings_import.dart';
+import 'package:flutter_login_ui/settings_priorities.dart';
 import 'package:flutter_login_ui/signup_screen.dart';
 import 'package:flutter_login_ui/settings_page.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Login UI',
       debugShowCheckedModeBanner: false,
-      routes: <String, WidgetBuilder> {
+      routes: <String, WidgetBuilder>{
         '/signup_screen': (BuildContext context) => SignupPage(),
         '/home_page': (BuildContext context) => HomePage(),
         '/profile_page': (BuildContext context) => ProfilePage(),
@@ -30,8 +32,10 @@ class MyApp extends StatelessWidget {
         '/schedule_page': (BuildContext context) => SchedulePage(),
         '/import_page': (BuildContext context) => ImportPage(),
         '/settings_page': (BuildContext context) => SettingsPage(),
+        '/settings_import': (BuildContext context) => SettingsImport(),
+        '/settings_priorities': (BuildContext context) => SettingsPriorities(),
       },
-      home:LoginScreen(),
+      home: LoginScreen(),
     );
   }
 }
