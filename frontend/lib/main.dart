@@ -6,6 +6,8 @@ import 'package:flutter_login_ui/login_screen.dart';
 import 'package:flutter_login_ui/priorities_page.dart';
 import 'package:flutter_login_ui/profile_page.dart';
 import 'package:flutter_login_ui/schedule_page.dart';
+import 'package:flutter_login_ui/settings_import.dart';
+import 'package:flutter_login_ui/settings_priorities.dart';
 import 'package:flutter_login_ui/signup_screen.dart';
 import 'package:flutter_login_ui/settings_page.dart';
 void main() async {
@@ -30,8 +32,10 @@ class MyApp extends StatelessWidget {
         '/schedule_page': (BuildContext context) => SchedulePage(),
         '/import_page': (BuildContext context) => ImportPage(),
         '/settings_page': (BuildContext context) => SettingsPage(),
+        '/settings_import':(BuildContext context) => SettingsImport(),
+        '/settings_priorities': (BuildContext context) => SettingsPriorities(),
       },
-      home:HomePage(),
+      home: SettingsPage(),
     );
   }
 }
