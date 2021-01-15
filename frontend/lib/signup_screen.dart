@@ -80,6 +80,7 @@ class _SignupPageState extends State<SignupPage> {
   void _register() {
     //await Firebase.initializeApp();
      _auth.createUserWithEmailAndPassword(email: _emailCont.text.trim(),password: _passCont.text.trim(),).then((_){
+       _verify_user();
        Navigator.of(context).pushNamed('/import_page');
      });
   }
@@ -333,7 +334,12 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   }
-
+  void _verify_user(){
+    final _auth = FirebaseAuth.instance;
+    User user;
+    user = _auth.currentUser;
+    user.sendEmailVerification();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
